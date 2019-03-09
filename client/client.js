@@ -4,7 +4,16 @@ const socket = new WebSocket("ws://" + IP + ":" + PORT);
 
 var showConsole = true;
 var messageBox;
+var chat;
 var cons;
+
+function incomingMessage(data){
+    log(data);
+    var JSONdata = JSON.parse(data);
+    var htmlMessage = "<p style=\"color: " + JSONdata.color + "\">" + JSONdata.user + ": " + JSONdata.data + "</p>"
+    log(htmlMessage);
+    chat.innerHTML = chat.innerHTML + htmlMessage
+}
 
 function sendMessage(){
     var data = JSON.stringify({
@@ -18,9 +27,10 @@ function sendMessage(){
 
 function windowLoaded(){
     cons = document.getElementById("console");
+    chat = document.getElementById("chatMessages");
     toggleConsole();
     messageBox = document.getElementById("message");
-    socket.onmessage = function(data){};
+    socket.onmessage = function(ev){incomingMessage(ev.data)};
     socket.onopen = log("Connection established");
     socket.onerror = log("WebSocket error!");
 }

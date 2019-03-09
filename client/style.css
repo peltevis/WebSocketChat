@@ -39,10 +39,15 @@
       margin-block-end: 0;
   }
   
-  textarea.chatMessages {
+  .chatMessages {
       width: 100%;
       height: 100%;
-      resize: none;
+      overflow-y: scroll;
+      background-color: #FFF;
+  }
+
+  .chatMessages p {
+      margin: 0.01em;
   }
   
   input.sendMessageText {
