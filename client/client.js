@@ -10,7 +10,12 @@ var cons;
 function incomingMessage(data){
     log(data);
     var JSONdata = JSON.parse(data);
-    var htmlMessage = "<p style=\"color: #" + JSONdata.color + "\">" + JSONdata.user + ": " + JSONdata.data + "</p>"
+    var admin =JSONdata.admin;
+    var bold = "font-weight: 100;";
+    if(admin){
+        bold = "font-weight: 700;";
+    }
+    var htmlMessage = "<p style=\"color: #" + JSONdata.color + "; " + bold + "\">" + JSONdata.user + ": " + JSONdata.data + "</p>"
     log(htmlMessage);
     chat.innerHTML = chat.innerHTML + htmlMessage
 }

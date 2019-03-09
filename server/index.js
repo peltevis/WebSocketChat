@@ -19,17 +19,18 @@ wsServer.on('request',(request) => {
     var index = users.push(connection) - 1;
     var userName = false;
     var color = false;
-    var admin = false;
     connection.on('message', (data) => {
         JSONdata = JSON.parse(data.utf8Data);
         if(!userName){
             userName = JSONdata.data;
             color = '601010';
             console.log("Username: " + userName);
+            sendTo(index, JSON.stringify({type: "message", data: "You are now known as: " + userName, user: "Server", color: "50FF50", admin: true}));
+            sendToAll(JSON.stringify({type: "message", data: userName + " has joined.", user: "Server", color: "50FF50", admin: true}))
         }else{
             //Save message and send it
             var message = JSONdata.data;
-            var compositeMessage = JSON.stringify({type: "message", data: message, user: userName, color: color, admin: admin});
+            var compositeMessage = JSON.stringify({type: "message", data: message, user: userName, color: color, admin: false});
             messages.push(compositeMessage);
             messages = messages.slice(-20);
             console.log(userName + ": " + message );
@@ -39,6 +40,7 @@ wsServer.on('request',(request) => {
     connection.on('close', (data) => {
         console.log(userName + " has left the room.");
         users.splice(index, 1);
+        sendToAll(JSON.stringify({type: "message", data: userName + " has left the room.", user: "Server", color: "50FF50", admin: true}))
     });
 
 });
