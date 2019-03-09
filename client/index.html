@@ -1,0 +1,21 @@
+<head>
+    <title>WebSocket Chat</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="client.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="fullscreen" id ="fullscreen">
+            <textarea readonly id = "console" class = "console">
+            </textarea>
+            <div class="chatBody">
+                <textarea readonly class = "chatMessages" name = "chatMessages"></textarea>
+            </div>
+            <form class = "sendMessageHolder">
+                <input type="text" class = "sendMessageText inline" id = "message" name = "sendMessageText" autofocus />
+                <input type="button" class = "sendMessageButton inline" id = "send" name="sendMessageButton" value="Send!"/>
+            </form>
+            
+        </div>
+    </div>
+</body>
