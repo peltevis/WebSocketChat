@@ -4,14 +4,34 @@ const socket = new WebSocket("ws://" + IP + ":" + PORT);
 
 var showConsole = true;
 var messageBox;
+var cons;
+
+function sendMessage(){
+    var data = JSON.stringify({
+        type: "message",
+        data: messageBox.value
+    })
+
+    socket.send(data);
+    messageBox.value = "";
+}
+
 function windowLoaded(){
+    cons = document.getElementById("console");
     toggleConsole();
     messageBox = document.getElementById("message");
+    socket.onmessage = function(data){};
+    socket.onopen = log("Connection established");
+    socket.onerror = log("WebSocket error!");
+}
+
+function log(message){
+    console.log(message);
+    cons.value += "\n" + message;
 }
 
 function toggleConsole(){
     showConsole = !showConsole;
-    var cons = document.getElementById("console");
     var fullscreen = document.getElementById("fullscreen");
     if(showConsole){
         cons.style.visibility = "visible";
@@ -28,12 +48,7 @@ function keypress(evt){
         toggleConsole();
     }else if(evt.keyCode == 13){
         //Send message!
-        var data = JSON.stringify({
-            type: "message",
-            data: messageBox.value
-        })
-
-        socket.send(data);
+        sendMessage();
     }
 }
 

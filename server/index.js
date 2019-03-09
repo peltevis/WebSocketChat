@@ -21,14 +21,15 @@ wsServer.on('request',(request) => {
     var color = false;
     var admin = false;
     connection.on('message', (data) => {
+        JSONdata = JSON.parse(data.utf8Data);
         if(!userName){
-            userName = data.utf8Data;
+            userName = JSONdata.data;
             color = '601010';
             console.log("Username: " + userName);
         }else{
             //Save message and send it
-            var message = data.utf8Data;
-            var compositeMessage = JSON.stringify({type: "message", user: userName, color: color, admin: admin});
+            var message = JSONdata.data;
+            var compositeMessage = JSON.stringify({type: "message", data: message, user: userName, color: color, admin: admin});
             messages.push(compositeMessage);
             messages = messages.slice(-20);
             console.log(userName + ": " + message );

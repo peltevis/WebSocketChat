@@ -21,6 +21,8 @@
       height: 200px;
       background-color: #000;
       resize: none;
+      color: #FFF;
+      font-weight: bold;
   }
   
   .chatBody {
@@ -28,7 +30,7 @@
       height: 100%;
   }
   
-  form.sendMessageHolder {
+  form#sendMessageHolder {
       position: absolute;
       width: 100%;
       display: flex;

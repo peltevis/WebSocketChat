@@ -9,11 +9,11 @@
             <textarea readonly id = "console" class = "console">
             </textarea>
             <div class="chatBody">
-                <textarea readonly class = "chatMessages" name = "chatMessages"></textarea>
+                <textarea readonly class = "chatMessages" id = "chatMessages" name = "chatMessages"></textarea>
             </div>
-            <form class = "sendMessageHolder">
+            <form id = "sendMessageHolder" onsubmit="return false;">
                 <input type="text" class = "sendMessageText inline" id = "message" name = "sendMessageText" autofocus />
-                <input type="button" class = "sendMessageButton inline" id = "send" name="sendMessageButton" value="Send!"/>
+                <input type="button" class = "sendMessageButton inline" id = "send" name="sendMessageButton" value="Send!" onclick="sendMessage()"/>
             </form>
             
         </div>
