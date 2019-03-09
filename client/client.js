@@ -18,9 +18,11 @@ function incomingMessage(data){
     var htmlMessage = "<p style=\"color: #" + JSONdata.color + "; " + bold + "\">" + JSONdata.user + ": " + JSONdata.data + "</p>"
     log(htmlMessage);
     chat.innerHTML = chat.innerHTML + htmlMessage
+    chat.scrollTop = chat.scrollHeight;
 }
 
 function sendMessage(){
+    if(messageBox.value == "") return;
     var data = JSON.stringify({
         type: "message",
         data: messageBox.value
